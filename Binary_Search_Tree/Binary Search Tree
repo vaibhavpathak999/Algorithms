@@ -1,11 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
 
-struct node* search(struct node* root, int key)
+struct tree_node
 {
-	if (root == NULL || root->key == key)
-	return root;
-	
-	if (root->key < key)
-	return search(root->right, key);
+  int data;
+  struct tree_node* left_child;
+  struct tree_node* right_child;
+};
 
-	return search(root->left, key);
+struct tree_node* insert(struct tree_node* root, int key)
+{
+  if (root == NULL){
+    struct tree_node *temp =  (struct tree_node *)malloc(sizeof(struct tree_node));
+    temp->data = key;
+    temp->left_child = temp->right_child = NULL;
+    return temp;
+  }
+
+  if (key < root->data)
+    root->left_child = insert(root->left_child, key);
+  else if (key > root->data)
+    root->right_child = insert(root->right_child, key);
+
+  return root;
+}
+
+void printInorder(struct tree_node* tree_node)
+{
+  if (tree_node == NULL)
+    return;
+
+  // do the In-Order traversal of left_child
+  printInorder(tree_node->left_child);
+
+  // then print the data of tree_node
+  printf("%d ", tree_node->data);
+
+  // do the In-Order traversal of right_child
+  printInorder(tree_node->right_child);
+}
+// Function to search a given key in a given BST
+struct tree_node* search(struct tree_node* root, int key)
+{
+  // Base Cases: root is null or key is equal to root
+  if (root == NULL || root->data == key)
+    return root;
+
+  // Key is greater than root's data
+  if ((root->data) < key)
+    return search(root->right_child, key);
+
+  // Key is smaller than root's data
+  return search(root->left_child, key);
+}
+
+#define key 22	// The key to be searched is defined here.
+int main()
+{
+  // create the root tree_node
+  struct tree_node *root = NULL;
+  struct tree_node *temp;
+
+  root = insert(root, 25);
+  insert(root, 15);
+  insert(root, 50);
+  insert(root, 10);
+  insert(root, 22);
+  insert(root, 35);
+  insert(root, 70);
+
+  printf("Inorder traversal of binary search tree is \n");
+  printInorder(root);
+
+  printf("\n\nElement %d searched in BST \n",key);
+  temp = search(root, key);
+  if(temp)  printf("\n%d found in the tree",key);
+  else printf("\n%d not found in the tree",key);
+
+  return 0;
 }
