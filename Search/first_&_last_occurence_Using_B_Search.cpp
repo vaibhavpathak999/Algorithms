@@ -10,8 +10,8 @@
 #include <cassert> // For assert
 using namespace std;
 
-// First occurence of a number using binary search
-int firstOccurence_B_search(vector<int> v, int key)
+// First occurrence of a number using binary search
+int firstOccurrence_B_search(vector<int> v, int key)
 {
     int si = 0, ei = (int)v.size() - 1;
     int mid, ans = -1;
@@ -21,7 +21,7 @@ int firstOccurence_B_search(vector<int> v, int key)
         if (v[mid] == key)
         {
             // if found, I will update answer and put "ei = mid - 1", so as to see if there's any other 
-            // occurence before "ans"
+            // occurrence before "ans"
             ans = mid;
             ei = mid - 1;
         }
@@ -36,8 +36,8 @@ int firstOccurence_B_search(vector<int> v, int key)
     }
     return ans;
 }
-// Last occurence of a number using binary search
-int lastOccurence_B_search(vector<int> v, int key)
+// Last occurrence of a number using binary search
+int lastOccurrence_B_search(vector<int> v, int key)
 {
     int si = 0, ei = (int)v.size() - 1;
     int mid, ans = -1;
@@ -47,7 +47,7 @@ int lastOccurence_B_search(vector<int> v, int key)
         if (v[mid] == key)
         {
             // if found, i will update answer and put "si = mid + 1", so as to see if there's any other 
-            // occurence after "ans"
+            // occurrence after "ans"
             ans = mid;
             si = mid + 1;
         }
@@ -65,9 +65,9 @@ int lastOccurence_B_search(vector<int> v, int key)
 void test()
 {
     vector<int> v = {1, 2, 3, 3, 5, 6, 6, 6, 8};
-    assert(firstOccurence_B_search(v, 3) == 2); // First occurrence of 3 is "index 2"
+    assert(firstOccurrence_B_search(v, 3) == 2); // First occurrence of 3 is "index 2"
 
-    assert(lastOccurence_B_search(v, 6) == 7); // Last occurrence of 6 is "index 7";
+    assert(lastOccurrence_B_search(v, 6) == 7); // Last occurrence of 6 is "index 7";
 
     cout << "All Test Cases passed successfully!";
 
