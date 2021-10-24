@@ -4,18 +4,26 @@ using namespace std;
 
 int lis(int arr[], int n)
 {
-	int lis[n];
-
-	lis[0] = 1;
-
-	for (int i = 1; i < n; i++) {
-		lis[i] = 1;
-		for (int j = 0; j < i; j++)
-			if (arr[i] > arr[j] && lis[i] < lis[j] + 1)
-				lis[i] = lis[j] + 1;
+	int lis[n+1];
+	for(int i=0;i<=n;i++)
+		lis[i]=1e9;//INF
+	lis[0]=-1e9;//-INF
+	for(int i=0;i<n;i++)
+	{
+		int j=upper_bound(lis,lis+n+1,ar[i])-lis;
+		if( ar[i]>lis[j-1] && ar[i]<lis[j] ) 
+			lis[j]=ar[i];
 	}
-
-	return *max_element(lis, lis + n);
+	
+	int ans=0;
+	for(int i=0;i<=n;i++)
+	{
+		if(lis[i]!=1e9)
+			ans=i;
+	}
+	
+	return ans;
+	
 }
 
 /* Driver program to test above function */
