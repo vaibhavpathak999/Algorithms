@@ -10,9 +10,9 @@ int lis(int arr[], int n)
 	lis[0]=-1e9;//-INF
 	for(int i=0;i<n;i++)
 	{
-		int j=upper_bound(lis,lis+n+1,ar[i])-lis;
-		if( ar[i]>lis[j-1] && ar[i]<lis[j] ) 
-			lis[j]=ar[i];
+		int j=upper_bound(lis,lis+n+1,arr[i])-lis;
+		if( arr[i]>lis[j-1] && arr[i]<lis[j] ) 
+			lis[j]=arr[i];
 	}
 	
 	int ans=0;
